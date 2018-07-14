@@ -91,6 +91,39 @@ special binary string的定义如下：
 所以我们要对自身调用递归函数，我们不用对整个子串调用递归，因为字串的起始位置和结束位置是确定的，一定是1和0，我们只需对中间的调用递归即可，
 然后更新i为j+1。当我们将所有排序后的合法字串存入v中后，我们对v进行排序，将字母顺序大的放前面，最后将其连为一个字符串即可，参见代码如下：。
 """
-
+/*
+     * 1、找到满足要求的特殊二进制串，该二进制串肯定是以1开始，以0结束,
+     * 所以除去最前面的1和最后面的0，中间部分也是特殊二进制串，继续对中间部分进行递归处理。
+     * 2、将找到的满足要求的特殊二进制串放入list中，然后按照字典序进行排序。
+     * 3、返回进行字典序排序的结果
+     * @param S
+     * @return
+     */
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+class Solution:
+    def makeLargestSpecial(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        
+        # a list of substrings
+        l=[]
+        cnt=0 #count for 1, make a stack 1 push, 0 pull
+        i= 0 #S 's pointer, ancher?
+        for j, v in enumerate(S):
+            if v=='1':
+              cnt=cnt +1
+            else：
+              cnt-1
+            if cnt == 0: # to make Special as small as possible， smallest substrings
+                l.append('1' + self.makeLargestSpecial(S[i+1:j]) + '0') # first must be 1, last must be 0
+                i = j + 1
+        return ''.join(sorted(l)[::-1])
+    
+s=Solution()
+
+
+
