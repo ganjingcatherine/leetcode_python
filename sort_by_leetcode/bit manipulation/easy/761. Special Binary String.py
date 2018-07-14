@@ -108,22 +108,27 @@ class Solution:
         :type S: str
         :rtype: str
         """
-        
-        # a list of substrings
-        l=[]
-        cnt=0 #count for 1, make a stack 1 push, 0 pull
-        i= 0 #S 's pointer, ancher?
-        for j, v in enumerate(S):
-            if v=='1':
-              cnt=cnt +1
-            else：
-              cnt-1
-            if cnt == 0: # to make Special as small as possible， smallest substrings
-                l.append('1' + self.makeLargestSpecial(S[i+1:j]) + '0') # first must be 1, last must be 0
-                i = j + 1
-        return ''.join(sorted(l)[::-1])
-    
-s=Solution()
 
+        # a list of substrings
+        l = []
+        cnt = 0  # count for 1, make a stack 1 push, 0 pull
+        i = 0  # S 's pointer, ancher?
+        for j, v in enumerate(S):
+
+            import pdb; pdb.set_trace()
+
+            if v == '1':
+                cnt = cnt + 1
+            else:
+                cnt=cnt - 1
+            if cnt == 0:  # to make Special as small as possible smallest substrings
+                l.append('1' + self.makeLargestSpecial(S[i + 1:j]) + '0')  # first must be 1, last must be 0
+                i = j + 1
+
+        return ''.join(sorted(l)[::-1])
+
+
+s = Solution()
+print s.makeLargestSpecial('1011001100')
 
 
